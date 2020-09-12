@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from "react";
+import "./App.css";
+
+const OptimizationPage = lazy(() => import("./pages/OptimizationPage"));
+const Header = lazy(() => import("./components/Header"));
+const Breadcrum = lazy(() => import("./components/Breadcrum"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Suspense fallback={<p>Loading...</p>}>
+        <div className="header-wrapper">
+          <Header />
+          <Breadcrum />
+        </div>
+        <main className="container">
+          <OptimizationPage />
+        </main>
+      </Suspense>
     </div>
   );
 }
